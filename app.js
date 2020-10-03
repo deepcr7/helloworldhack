@@ -35,7 +35,7 @@ db.once("open", async () => {
   await Promise.all([Organisation.init(), Worker.init(), User.init()]);
   console.log("db connected");
   app.use("/worker", workerRouter);
-  app.use("/user", checkAuth, userRouter);
+  app.use("/user", userRouter);
 });
 
 const port = process.env.PORT || 3000;
