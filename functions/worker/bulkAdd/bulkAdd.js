@@ -2,7 +2,7 @@ const Organisation = require("../../../models/Organisation");
 // const Worker = require("../../../models/Worker");
 const addMultipleWorkers = require("../addMultipleWorkers/addMultipleWorkers");
 const User = require("../../../models/User");
-module.exports = async (req, res) => {
+/*module.exports = async (req, res) => {
   console.log("body of request", req.body);
   const { workersInfo, organisationInfo, organisationId } = req.body;
 
@@ -73,4 +73,25 @@ module.exports = async (req, res) => {
     });
   }
   // console.log("mappings : ", pinCodeToDistrictMap);
-};
+};*/
+
+
+module.exports = async (req, res) => {
+  console.log("body of request", req.body);
+  const { workersInfo} = req.body;
+    console.log("trying to update organisation and add more workers");
+      //console.log("user leader <" + leader._id + ">");
+      //console.log("leaderId <" + organisation.leaderId + ">");
+        const addedWorkerIds = await addMultipleWorkers(workersInfo)
+        if(addedWorkerIds){
+          return res.status(200).send({
+            data: [addedWorkerIds]
+          })
+        } else{
+          return res.status(403).send({
+            message: "The workers might not have been added"
+          })
+        } 
+        console.log("added worker ids: ", addedWorkerIds);
+ };
+  // console.log("mappings : ", pinCodeToDistrictMap);
