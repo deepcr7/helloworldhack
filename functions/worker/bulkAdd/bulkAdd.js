@@ -93,5 +93,5 @@ module.exports = async (req, res) => {
           })
         } 
         console.log("added worker ids: ", addedWorkerIds);
- };
+      };
   // console.log("mappings : ", pinCodeToDistrictMap);

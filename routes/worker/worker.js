@@ -13,7 +13,7 @@ Router.get(
   searchWorkers
 );
 
-Router.post("/bulkadd", checkAuth, bulkadd);
+Router.post("/bulkadd", bulkadd);
 Router.post("/message", async (req, res) => {
   console.log("received message/worker create request");
   const { message, sender } = req.body;
