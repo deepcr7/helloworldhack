@@ -85,7 +85,7 @@ module.exports = async (req, res) => {
         const addedWorkerIds = await addMultipleWorkers(workersInfo)
         if(addedWorkerIds){
           return res.status(200).send({
-            data: [addedWorkerIds]
+            data: addedWorkerIds
           })
         } else{
           return res.status(403).send({
