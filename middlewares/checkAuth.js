@@ -1,5 +1,4 @@
-var admin = require("firebase-admin");
-
+var admin = require('firebase-admin');
 
 var serviceAccount = {
   type: process.env.TYPE,
@@ -13,13 +12,10 @@ var serviceAccount = {
   auth_provider_x509_cert_url: process.env.AUTH_PROVIDER_X509_CERT_URL,
   client_x509_cert_url: process.env.CLIENT_X509_CERT_URL,
 };
-// console.log("process env", process.env);
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://helloworld-4784e.firebaseio.com"
+  databaseURL: 'https://helloworld-4784e.firebaseio.com',
 });
-
-console.log("initialised firebase app");
 
 const checkAuth = (req, res, next) => {
   if (req.headers.authtoken) {
@@ -28,19 +24,19 @@ const checkAuth = (req, res, next) => {
       .auth()
       .verifyIdToken(req.headers.authtoken)
       .then((decodedToken) => {
-        console.log("decoded token", decodedToken);
+        console.log('decoded token', decodedToken);
         req.user = decodedToken;
         next();
       })
       .catch(() => {
-        console.log("some problem with token. Unable to decode");
+        console.log('some problem with token. Unable to decode');
         return res.status(403).send({
-          message: "Unauthorized",
+          message: 'Unauthorized',
         });
       });
   } else {
     return res.status(403).send({
-      message: "no authtoken provided in header",
+      message: 'no authtoken provided in header',
     });
   }
 };
